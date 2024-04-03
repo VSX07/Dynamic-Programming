@@ -1,0 +1,37 @@
+#include<iostream>
+using namespace std;
+int multiplepaths(int m,int n){
+    if(m==0 and n==0){
+        return 1;
+    }
+    int ans=0;
+    for(int k=m-1;k>=0;k--){
+        ans=ans+multiplepaths(k,n);
+    }
+    for(int k=n-1;k>=0;k--){
+        ans=ans+multiplepaths(m,k);
+    }
+    return ans;
+}
+int tdmultiplepaths(int m,int n,int arr[100][100]){
+    if(m==0 and n==0){
+        return arr[m][n]=1;
+    }
+    int ans=0;
+    for(int k=m-1;k>=0;k--){
+        ans=ans+tdmultiplepaths(k,n,arr);
+    }
+    for(int k=n-1;k>=0;k--){
+        ans=ans+tdmultiplepaths(m,k,arr);
+    }
+    return arr[m][n]=ans;
+}
+
+int main(){
+    int m,n;
+    cin>>m>>n;
+    cout<<multiplepaths(m,n)<<endl;
+    int arr[100][100]={0};
+    cout<<tdmultiplepaths(m,n,arr)<<endl;
+    cout<<bottomupmultiplepaths(m,n)<<endl;
+}
